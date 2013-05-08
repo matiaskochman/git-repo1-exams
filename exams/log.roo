@@ -1,0 +1,5 @@
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-08 14:40:14
+project --topLevelPackage com.exams --projectName exams --java 7 --packaging WAR
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-08 14:40:34
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-08 14:43:23
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
