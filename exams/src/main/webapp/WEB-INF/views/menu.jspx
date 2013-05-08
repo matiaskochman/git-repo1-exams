@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_helloworldentity" z="jqIQxSI1IngMCl3xAWJJMx53kD0=">
+            <menu:item id="i_helloworldentity_new" messageCode="global_menu_new" url="/helloworldentitys?form" z="ZGfTx9I6RV74tu5uVMGnof+rc0I="/>
+            <menu:item id="i_helloworldentity_list" messageCode="global_menu_list" url="/helloworldentitys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KZhxaflOrc3ZsEv8Ltf2qVW2V8w="/>
+        </menu:category>
+    </menu:menu>
+</div>

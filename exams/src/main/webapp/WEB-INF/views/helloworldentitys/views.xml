@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="helloworldentitys/list">
+        <put-attribute name="body" value="/WEB-INF/views/helloworldentitys/list.jspx"/>
+    </definition>
+<definition extends="default" name="helloworldentitys/show">
+        <put-attribute name="body" value="/WEB-INF/views/helloworldentitys/show.jspx"/>
+    </definition>
+<definition extends="default" name="helloworldentitys/create">
+        <put-attribute name="body" value="/WEB-INF/views/helloworldentitys/create.jspx"/>
+    </definition>
+<definition extends="default" name="helloworldentitys/update">
+        <put-attribute name="body" value="/WEB-INF/views/helloworldentitys/update.jspx"/>
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,12 @@
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-08 15:17:41
+project --topLevelPackage com.exams --projectName exams --java 7 --packaging WAR
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-08 15:17:57
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-08 15:18:25
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.entity.HelloWorldEntity
+field string --fieldName hello 
+web mvc setup
+web mvc all --package ~.controller
+web mvc json all 
+json all 
+web mvc json all 
