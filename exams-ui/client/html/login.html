@@ -1,0 +1,95 @@
+<!doctype html>
+<html ng-app="exams-login">
+
+    <head> 
+        <title>Exams</title>
+        <link type="text/css" rel="stylesheet" href="/css/login.css"/>
+    </head>
+
+    <body class="com-exams" ng-controller="com.exams.LoginCtrl">
+
+        <div id="inputs-block" ng-class="switchView">
+
+            <div id="signin" ng-controller="com.exams.SignInCtrl">
+                <h3>Exams application</h3>
+                <div class="row collapse">
+                    <div class="small-3 large-3 columns">
+                        <span class="prefix">E-mail</span>
+                    </div>
+                    <div class="small-9 large-9 columns">
+                        <input id="signin-email" type="text" placeholder="type your e-mail" ng-model="signInEmail" ng-class="signInEmailClass" ng-keyup-enter="onKeyUpEnter"/>
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-3 large-3 columns">
+                        <span class="prefix">Password</span>
+                    </div>
+                    <div class="small-9 large-9 columns">
+                        <input id="signin-pass" type="password" placeholder="type your password" ng-model="signInPass" ng-class="signInPassClass" ng-keyup-enter="onKeyUpEnter"/>
+                    </div>
+                </div>
+                <div class="row align-right">
+                    <a href="#" ng-click="forgotPass($event)">Forgot password?</a>
+                    <span class="spacer"></span>
+                    <a id="signin-btn" href="#" class="medium button" ng-click="signIn($event)">Sign in</a>
+                </div>
+                <div class="signin-bottom">
+                    <div class="row collapse">
+                        <div class="small-4 large-4 columns">
+                            <a id="mailto" href="mailto:admin@exams.com">&copy; 2013 Exams</a>
+                        </div>
+                        <div class="small-8 large-8 columns align-right">
+                            <span class="alternative-color">Create an account:</span>
+                            <span class="spacer"></span>
+                            <a id="signup-btn" href="#" class="medium button success" ng-click="showSignUp($event)">Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="signup" style="visibility: hidden;" ng-controller="com.exams.SignUpCtrl" ng-style="signUpStyle">
+                <h3>Sign up</h3>
+                <div class="row collapse">
+                    <div class="small-3 large-3 columns">
+                        <span class="prefix">E-mail</span>
+                    </div>
+                    <div class="small-9 large-9 columns">
+                        <input id="signup-email" type="text" placeholder="type your e-mail" ng-model="signUpEmail" ng-class="signUpEmailClass"/>
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-3 large-3 columns">
+                        <span class="prefix">Password</span>
+                    </div>
+                    <div class="small-9 large-9 columns">
+                        <input id="signup-pass" type="password" placeholder="type your password" ng-model="signUpPass" ng-class="signUpPassClass"/>
+                    </div>
+                </div>
+                <div class="row align-right">
+                    <a id="signin-btn" href="#" class="medium button" ng-click="signUp($event)">Sign up</a>
+                </div>
+                <div class="signin-bottom">
+                    <div class="row collapse">
+                        <div class="small-4 large-4 columns">
+                            <a id="mailto" href="mailto:admin@exams.com">&copy; 2013 Exams</a>
+                        </div>
+                        <div class="small-8 large-8 columns align-right">
+                            <span class="alternative-color">Go back to sign in:</span>
+                            <span class="spacer"></span>
+                            <a id="signup-btn" href="#" class="medium button success" ng-click="showSignIn($event)">Sign in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader-mask" ng-show="showLoader"></div>
+        </div>
+
+        <script type="text/javascript" src="/js/lib/jquery.js"></script>
+        <script type="text/javascript" src="/js/lib/foundation.js"></script>
+        <script type="text/javascript" src="/js/lib/foundation.forms.js"></script>
+        <script type="text/javascript" src="/js/lib/angular.js"></script>
+        <script type="text/javascript" src="/js/login.js"></script>
+
+    </body>
+</html>

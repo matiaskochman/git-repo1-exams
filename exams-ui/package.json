@@ -1,0 +1,13 @@
+{
+    "name": "exams",
+    "version": "1.0.0",
+    "dependencies": {
+        "express": "x",
+        "requirejs": "x",
+        "grunt": "x",
+        "grunt-requirejs": "x",
+        "jade": "x",
+        "moment": "x",
+        "less": "x"
+    }
+}

@@ -1,0 +1,52 @@
+doctype 5
+html(ng-app="exams-login")
+
+    head 
+        title exams
+        link(type="text/css", rel="stylesheet", href="/css/login.css")
+
+    body(class="com-exams", ng-controller="com.exams.LoginCtrl")
+
+        div(id="inputs-block", ng-class="switchView")
+
+            div(id="signin", ng-style="signIn")
+                h3 Exams application
+                div(class="row collapse")
+                    div(class="small-3 large-3 columns")
+                        span(class="prefix") Username
+                    div(class="small-9 large-9 columns")
+                        input(id="loginInput", type="text", placeholder="type your login")
+                div(class="row collapse")
+                    div(class="small-3 large-3 columns")
+                        span(class="prefix") Password
+                    div(class="small-9 large-9 columns")
+                        input(id="passInput", type="password", placeholder="type your password")
+                div(class="row align-right")
+                    a(href="#") Forgot password?
+                    span(class="spacer")
+                    a(id="signin-btn", href="#", class="medium button") Sign in
+                div(class="signin-bottom")
+                    div(class="row collapse")
+                        div(class="small-4 large-4 columns")
+                            a(id="mailto", href="mailto:admin@exams.com") &copy; 2013 Exams
+                        div(class="small-8 large-8 columns align-right")
+                            span(class="alternative-color") Create an account:
+                            span(class="spacer")
+                            a(id="signup-btn", href="#", class="medium button success", ng-click="showSignUp($event)") Sign up
+
+            div(id="signup", ng-style="signUp")
+                h3 Sign up
+                div(class="signin-bottom")
+                    div(class="row collapse")
+                        div(class="small-4 large-4 columns")
+                            a(id="mailto", href="mailto:admin@exams.com") &copy; 2013 Exams
+                        div(class="small-8 large-8 columns align-right")
+                            span(class="alternative-color") Go back to sign in:
+                            span(class="spacer")
+                            a(id="signup-btn", href="#", class="medium button success", ng-click="showSignUp($event)") Sign in
+
+        script(type="text/javascript", src="/js/lib/jquery.js")
+        script(type="text/javascript", src="/js/lib/angular.js")
+        script(type="text/javascript", src="/js/lib/foundation.js")
+        script(type="text/javascript", src="/js/lib/foundation.forms.js")
+        script(type="text/javascript", src="/js/login.js")
