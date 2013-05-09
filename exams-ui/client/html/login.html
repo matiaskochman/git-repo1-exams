@@ -17,7 +17,8 @@
                         <span class="prefix">E-mail</span>
                     </div>
                     <div class="small-9 large-9 columns">
-                        <input id="signin-email" type="text" placeholder="type your e-mail" ng-model="signInEmail" ng-class="signInEmailClass" ng-keyup-enter="onKeyUpEnter"/>
+                        <input id="signin-email" type="text" placeholder="type your e-mail" ng-model="signInEmail" ng-class="signInEmailClass" 
+                            ng-keyup-enter="onKeyUpEnter" ng-focus="focus"/>
                     </div>
                 </div>
                 <div class="row collapse">
@@ -25,7 +26,8 @@
                         <span class="prefix">Password</span>
                     </div>
                     <div class="small-9 large-9 columns">
-                        <input id="signin-pass" type="password" placeholder="type your password" ng-model="signInPass" ng-class="signInPassClass" ng-keyup-enter="onKeyUpEnter"/>
+                        <input id="signin-pass" type="password" placeholder="type your password" ng-model="signInPass" ng-class="signInPassClass" 
+                            ng-keyup-enter="onKeyUpEnter"/>
                     </div>
                 </div>
                 <div class="row align-right">
@@ -44,6 +46,14 @@
                             <a id="signup-btn" href="#" class="medium button success" ng-click="showSignUp($event)">Sign up</a>
                         </div>
                     </div>
+                </div>
+                <div class="row alert-block" ng-alert="#alert-template">
+                    <script type="text/template" id="alert-template">
+                        <div class="alert-box alert" ng-show="showAlert">
+                            <span class="message"></span>
+                            <a href="#" class="close">&times;</a>
+                        </div>
+                    </script>
                 </div>
             </div>
 
@@ -86,9 +96,9 @@
         </div>
 
         <script type="text/javascript" src="/js/lib/jquery.js"></script>
+        <script type="text/javascript" src="/js/lib/angular.js"></script>
         <script type="text/javascript" src="/js/lib/foundation.js"></script>
         <script type="text/javascript" src="/js/lib/foundation.forms.js"></script>
-        <script type="text/javascript" src="/js/lib/angular.js"></script>
         <script type="text/javascript" src="/js/login.js"></script>
 
     </body>

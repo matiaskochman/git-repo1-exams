@@ -20,6 +20,46 @@ angular.module('exams.directive', []).directive('ngKeyupEnter', function () {
             });
         }
     };
+}).directive('ngFocus', function () {
+    return {
+        link: function ($scope, elem, attrs, ctrl) {
+            $(elem).focus();
+        }
+    };
+}).directive('ngAlert', function () {
+    return {
+        link: function ($scope, elem, attrs, ctrl) {
+            if (attrs && attrs.ngAlert) {
+                var $alertBlock = $(elem),
+                $template = $alertBlock.find(attrs.ngAlert);
+                if ($template.length > 0) {
+                    var template = $template.html();
+                    $scope.$on('alert', function (event, msg) {
+                        $alertBlock.find('.alert-box').remove();
+                        var $alert = $($.trim(template));
+                        $alert.find('.message').html(msg);
+                        $alertBlock.append($alert);
+                        setTimeout(function () {
+                            $alert.css('opacity', '1');
+                        }, 100);
+                        var clear = function () {
+                            $alert.removeAttr('style');
+                            setTimeout(function () {
+                                clearTimeout(timer);
+                                $alert.remove();
+                            }, 500);
+                        },
+                        timer = setTimeout(function () {
+                            clear();
+                        }, 8100);
+                        $alert.find('.close').click(function () {
+                            clear();
+                        });
+                    });
+                }
+            }
+        }
+    };
 });
 
 // angular app
@@ -60,11 +100,13 @@ com.exams.SignInCtrl = function ($scope, $http, $location) {
 
     $scope.signIn = function ($event) {
         $event.preventDefault();
-        var formValid = true;
+        var formValid = true,
+        invalidMsg = '';
 
         if ($scope.signInEmail.length === 0) {
             $scope.signInEmailClass = 'error';
             formValid = false;
+            invalidMsg += 'The e-mail is empty';
         } else {
             $scope.signInEmailClass = '';
         }
@@ -72,6 +114,12 @@ com.exams.SignInCtrl = function ($scope, $http, $location) {
         if ($scope.signInPass.length === 0) {
             $scope.signInPassClass = 'error';
             formValid = false;
+            if (invalidMsg.length > 0) {
+                invalidMsg += ' and the ';
+            } else {
+                invalidMsg += 'The ';
+            }
+            invalidMsg += 'password is empty';
         } else {
             $scope.signInPassClass = '';
         }
@@ -92,7 +140,10 @@ com.exams.SignInCtrl = function ($scope, $http, $location) {
             }).error(function () {
                 console.log('login error');
                 $scope.$emit('hideLoader');
+                $scope.$emit('alert', 'Invalid credential');
             });
+        } else {
+            $scope.$emit('alert', invalidMsg);
         }
     };
 
