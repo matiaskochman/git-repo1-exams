@@ -25,3 +25,4 @@ field set --fieldName questionsList --type ~.entity.Question
 json all 
 web mvc all --package ~.controller
 web mvc json all 
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-09 15:32:51
