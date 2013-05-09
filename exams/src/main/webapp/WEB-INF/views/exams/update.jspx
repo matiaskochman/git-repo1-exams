@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_exams_entity_Exam" modelAttribute="exam" path="/exams" versionField="Version" z="SY6fHgqOnXD8NgU5WDopriIXG+Y=">
+        <field:input field="description" id="c_com_exams_entity_Exam_description" required="true" z="vcPgJAvErnHJJqL+pYLJi7mwyE8="/>
+        <field:select field="questionsList" id="c_com_exams_entity_Exam_questionsList" itemValue="id" items="${questions}" multiple="true" path="/questions" z="1KAqL2u1xXJqqRRXsSKlB7x5Fcg="/>
+    </form:update>
+</div>

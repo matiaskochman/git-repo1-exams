@@ -7,5 +7,17 @@
             <menu:item id="i_helloworldentity_new" messageCode="global_menu_new" url="/helloworldentitys?form" z="ZGfTx9I6RV74tu5uVMGnof+rc0I="/>
             <menu:item id="i_helloworldentity_list" messageCode="global_menu_list" url="/helloworldentitys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KZhxaflOrc3ZsEv8Ltf2qVW2V8w="/>
         </menu:category>
+        <menu:category id="c_exam" z="nFJVnlJsoldLR4kFzG9WVMjmQDw=">
+            <menu:item id="i_exam_new" messageCode="global_menu_new" url="/exams?form" z="0QhVf7YPIf9lJUZVN3F9x/H09oM="/>
+            <menu:item id="i_exam_list" messageCode="global_menu_list" url="/exams?page=1&amp;size=${empty param.size ? 10 : param.size}" z="oS/tqyZMsdzAD4hyTzqbQE3v0h0="/>
+        </menu:category>
+        <menu:category id="c_question" z="SR0L0iZw9fVnYZY0B/dk7XBq6eQ=">
+            <menu:item id="i_question_new" messageCode="global_menu_new" url="/questions?form" z="7Bx54/bA+53IAlm/YYWnirDy13E="/>
+            <menu:item id="i_question_list" messageCode="global_menu_list" url="/questions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="xkHgyP5wW2F64BsTqMA7Yb0CdHY="/>
+        </menu:category>
+        <menu:category id="c_questionoption" z="s6dDh2JL1YbtAB8uuTeq+Yxcqdk=">
+            <menu:item id="i_questionoption_new" messageCode="global_menu_new" url="/questionoptions?form" z="KDQQLUf+uPmr9YCbL80NdexAJc0="/>
+            <menu:item id="i_questionoption_list" messageCode="global_menu_list" url="/questionoptions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="uvY3E1Y7WpjiRNJLJe765gekdFw="/>
+        </menu:category>
     </menu:menu>
 </div>

@@ -10,3 +10,18 @@ web mvc all --package ~.controller
 web mvc json all 
 json all 
 web mvc json all 
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-09 13:38:14
+// [failed] entity jpa --class ~.entity.User --testAutomatically 
+entity jpa --class ~.entity.QuestionOption --testAutomatically 
+field string --fieldName description --notNull 
+field string --fieldName optionNumber --notNull
+entity jpa --class ~.entity.Question
+field string --fieldName description --notNull
+field set --fieldName optionsList --type ~.entity.QuestionOption
+field set --fieldName correctOptionsList --type ~.entity.QuestionOption
+entity jpa --class ~.entity.Exam --testAutomatically
+field string --fieldName description --notNull 
+field set --fieldName questionsList --type ~.entity.Question
+json all 
+web mvc all --package ~.controller
+web mvc json all 
