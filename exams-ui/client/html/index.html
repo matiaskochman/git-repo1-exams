@@ -8,6 +8,22 @@
 
     <body class="com-exams" ng-controller="com.exams.MainCtrl" ng-ready="ready">
 
+        <!--[if lt IE 9]>
+        <div class="ie">
+            <div class="row">
+                <div class="large-12 columns">Internet Explorer before version 9 is not supported.</div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <ul>
+                        <li><a href="https://www.google.com/intl/en/chrome/browser/" target="blank">Google Chrome</a></li>
+                        <li><a href="http://www.mozilla.org/firefox/" target="blank">Mozilla Firefox</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <![endif]-->
+        <!--[if (!IE)|(gte IE 9)]>-->
         <nav class="top-bar">
             <ul class="title-area">
                 <li class="name">
@@ -20,7 +36,7 @@
                 <ul class="left">
                     <li class="divider hide-for-small"></li>
                     <li class="has-form">
-                        <a class="medium button" href="#" ng-click="preventDefault($event)">Create new exam</a>
+                        <a class="medium button" href="#!/exams/create">Create new exam</a>
                     </li>
                     <li class="divider"></li>
                     <li class="has-dropdown"><a href="#" ng-click="preventDefault($event)">Exams</a>
@@ -31,7 +47,7 @@
                         </ul>
                     </li>
                     <li class="divider"></li>
-                    <li class="has-dropdown"><a href="#" ng-click="preventDefault($event)">Applicant</a>
+                    <li class="has-dropdown"><a href="#" ng-click="preventDefault($event)">Applicants</a>
                         <ul class="dropdown">
                             <li><a href="#" ng-click="preventDefault($event)">Create</a></li>
                             <li><a href="#" ng-click="preventDefault($event)">List</a></li>
@@ -51,6 +67,8 @@
 
                 <ul class="right">
                     <li class="divider hide-for-small"></li>
+                    <li><a href="#" target="_blank" ng-click="preventDefault($event)">Help</a></li>
+                    <li class="divider"></li>
                     <li><a href="https://github.com/matiaskochman/git-repo1-exams" target="_blank">Github</a></li>
                 </ul>
             </section>
@@ -65,7 +83,7 @@
                 </div>
                 <div class="large-8 columns">
                     <ul class="inline-list right">
-                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="#!/home">Home</a></li>
                         <li><a href="#" ng-click="preventDefault($event)">Contact</a></li>
                         <li><a href="#" ng-click="preventDefault($event)">About</a></li>
                     </ul>
@@ -80,6 +98,6 @@
         <script type="text/javascript" src="/js/lib/foundation.forms.js"></script>
         <script type="text/javascript" src="/js/lib/foundation.topbar.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
-
+        <!--<![endif]-->
     </body>
 </html>

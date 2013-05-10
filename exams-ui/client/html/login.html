@@ -7,7 +7,23 @@
     </head>
 
     <body class="com-exams" ng-controller="com.exams.LoginCtrl">
-
+    
+        <!--[if lt IE 9]>
+        <div class="ie">
+            <div class="row">
+                <div class="large-12 columns">Internet Explorer before version 9 is not supported.</div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <ul>
+                        <li><a href="https://www.google.com/intl/en/chrome/browser/" target="blank">Google Chrome</a></li>
+                        <li><a href="http://www.mozilla.org/firefox/" target="blank">Mozilla Firefox</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <![endif]-->
+        <!--[if (!IE)|(gte IE 9)]>-->
         <div id="inputs-block" ng-class="switchView">
 
             <div id="signin" ng-controller="com.exams.SignInCtrl">
@@ -100,6 +116,6 @@
         <script type="text/javascript" src="/js/lib/foundation.js"></script>
         <script type="text/javascript" src="/js/lib/foundation.forms.js"></script>
         <script type="text/javascript" src="/js/login.js"></script>
-
+        <!--<![endif]-->
     </body>
 </html>
