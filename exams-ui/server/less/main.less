@@ -1,9 +1,36 @@
 @import "lib/normalize";
 @import "lib/3l";
+@import "lib/foundation";
+
+html, body {
+    background-color: #fafafa;
+}
 
 body {
-    padding: 1em;
+    padding: 0;
     margin: 0;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.com-exams {
+    
+    #bottom-bar {
+        padding: 11px 0;
+        margin-top: 30px;
+
+        .row {
+            padding-top: 1em;
+            padding-bottom: 1em;
+            .vertical-gradient (#f0f0f0, #e9e9e9);
+        }
+
+        .row.full-width {
+            max-width: 100%;
+        }
+
+        ul, p {
+            margin-bottom: 0;
+        }
+    }
 }
