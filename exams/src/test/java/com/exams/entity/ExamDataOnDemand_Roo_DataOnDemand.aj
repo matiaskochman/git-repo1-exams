@@ -5,6 +5,7 @@ package com.exams.entity;
 
 import com.exams.entity.Exam;
 import com.exams.entity.ExamDataOnDemand;
+import com.exams.service.ExamService;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect ExamDataOnDemand_Roo_DataOnDemand {
@@ -21,6 +23,9 @@ privileged aspect ExamDataOnDemand_Roo_DataOnDemand {
     private Random ExamDataOnDemand.rnd = new SecureRandom();
     
     private List<Exam> ExamDataOnDemand.data;
+    
+    @Autowired
+    ExamService ExamDataOnDemand.examService;
     
     public Exam ExamDataOnDemand.getNewTransientExam(int index) {
         Exam obj = new Exam();
@@ -43,14 +48,14 @@ privileged aspect ExamDataOnDemand_Roo_DataOnDemand {
         }
         Exam obj = data.get(index);
         Long id = obj.getId();
-        return Exam.findExam(id);
+        return examService.findExam(id);
     }
     
     public Exam ExamDataOnDemand.getRandomExam() {
         init();
         Exam obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Exam.findExam(id);
+        return examService.findExam(id);
     }
     
     public boolean ExamDataOnDemand.modifyExam(Exam obj) {
@@ -60,7 +65,7 @@ privileged aspect ExamDataOnDemand_Roo_DataOnDemand {
     public void ExamDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = Exam.findExamEntries(from, to);
+        data = examService.findExamEntries(from, to);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Exam' illegally returned null");
         }
@@ -72,7 +77,7 @@ privileged aspect ExamDataOnDemand_Roo_DataOnDemand {
         for (int i = 0; i < 10; i++) {
             Exam obj = getNewTransientExam(i);
             try {
-                obj.persist();
+                examService.saveExam(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {

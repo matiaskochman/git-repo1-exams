@@ -47,3 +47,11 @@ web mvc all --package ~.controller
 focus --class ~.entity.Usuario
 web mvc all --package ~.controller
 focus --class ~.entity.Usuario
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-11 14:21:30
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-11 14:21:49
+jpa setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE 
+focus --class ~.entity.Usuario
+service --interface ~.service.UsuarioService --class ~.service.UsuarioServiceImpl --entity ~.entity.Usuario
+focus --class ~.entity.Exam
+service --interface ~.service.ExamService --class ~.service.ExamServiceImpl --entity ~.entity.Exam
