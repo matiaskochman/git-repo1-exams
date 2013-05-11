@@ -8,6 +8,7 @@ import com.exams.entity.Exam;
 import com.exams.entity.HelloWorldEntity;
 import com.exams.entity.Question;
 import com.exams.entity.QuestionOption;
+import com.exams.entity.Usuario;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -112,6 +113,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Usuario, String> ApplicationConversionServiceFactoryBean.getUsuarioToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.exams.entity.Usuario, java.lang.String>() {
+            public String convert(Usuario usuario) {
+                return new StringBuilder().append(usuario.getUserName()).append(' ').append(usuario.getPassword()).append(' ').append(usuario.getEmail()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Usuario> ApplicationConversionServiceFactoryBean.getIdToUsuarioConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.exams.entity.Usuario>() {
+            public com.exams.entity.Usuario convert(java.lang.Long id) {
+                return Usuario.findUsuario(id);
+            }
+        };
+    }
+    
+    public Converter<String, Usuario> ApplicationConversionServiceFactoryBean.getStringToUsuarioConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.exams.entity.Usuario>() {
+            public com.exams.entity.Usuario convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Usuario.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getExamToStringConverter());
         registry.addConverter(getIdToExamConverter());
@@ -125,6 +150,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getQuestionOptionToStringConverter());
         registry.addConverter(getIdToQuestionOptionConverter());
         registry.addConverter(getStringToQuestionOptionConverter());
+        registry.addConverter(getUsuarioToStringConverter());
+        registry.addConverter(getIdToUsuarioConverter());
+        registry.addConverter(getStringToUsuarioConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

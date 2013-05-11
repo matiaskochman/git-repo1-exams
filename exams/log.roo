@@ -26,3 +26,24 @@ json all
 web mvc all --package ~.controller
 web mvc json all 
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-09 15:32:51
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-11 11:50:49
+
+
+entity jpa --class ~.entity.Usuario
+field string --fieldName userName --notNull
+field string --fieldName password --notNull
+field string --fieldName email --notNull
+
+
+// [failed] json add 
+json all 
+web mvc controller --class ~.controller.UsuarioController
+web mvc json all 
+web mvc json add --jsonObject ~.UsuarioController
+web mvc json all 
+web mvc json all --package ~.controller
+web mvc controller --class ~.controller.UsuarioController
+web mvc all --package ~.controller
+focus --class ~.entity.Usuario
+web mvc all --package ~.controller
+focus --class ~.entity.Usuario
