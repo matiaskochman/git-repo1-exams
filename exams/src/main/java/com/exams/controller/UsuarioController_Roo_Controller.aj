@@ -5,9 +5,11 @@ package com.exams.controller;
 
 import com.exams.controller.UsuarioController;
 import com.exams.entity.Usuario;
+import com.exams.service.UsuarioService;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect UsuarioController_Roo_Controller {
     
+    @Autowired
+    UsuarioService UsuarioController.usuarioService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String UsuarioController.create(@Valid Usuario usuario, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect UsuarioController_Roo_Controller {
             return "usuarios/create";
         }
         uiModel.asMap().clear();
-        usuario.persist();
+        usuarioService.saveUsuario(usuario);
         return "redirect:/usuarios/" + encodeUrlPathSegment(usuario.getId().toString(), httpServletRequest);
     }
     
@@ -38,7 +43,7 @@ privileged aspect UsuarioController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String UsuarioController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("usuario", Usuario.findUsuario(id));
+        uiModel.addAttribute("usuario", usuarioService.findUsuario(id));
         uiModel.addAttribute("itemId", id);
         return "usuarios/show";
     }
@@ -48,11 +53,11 @@ privileged aspect UsuarioController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("usuarios", Usuario.findUsuarioEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Usuario.countUsuarios() / sizeNo;
+            uiModel.addAttribute("usuarios", usuarioService.findUsuarioEntries(firstResult, sizeNo));
+            float nrOfPages = (float) usuarioService.countAllUsuarios() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("usuarios", Usuario.findAllUsuarios());
+            uiModel.addAttribute("usuarios", usuarioService.findAllUsuarios());
         }
         return "usuarios/list";
     }
@@ -64,20 +69,20 @@ privileged aspect UsuarioController_Roo_Controller {
             return "usuarios/update";
         }
         uiModel.asMap().clear();
-        usuario.merge();
+        usuarioService.updateUsuario(usuario);
         return "redirect:/usuarios/" + encodeUrlPathSegment(usuario.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String UsuarioController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Usuario.findUsuario(id));
+        populateEditForm(uiModel, usuarioService.findUsuario(id));
         return "usuarios/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String UsuarioController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Usuario usuario = Usuario.findUsuario(id);
-        usuario.remove();
+        Usuario usuario = usuarioService.findUsuario(id);
+        usuarioService.deleteUsuario(usuario);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

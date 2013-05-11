@@ -20,7 +20,7 @@ privileged aspect ExamController_Roo_Controller_Json {
     @RequestMapping(value = "/{id}", headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> ExamController.showJson(@PathVariable("id") Long id) {
-        Exam exam = Exam.findExam(id);
+        Exam exam = examService.findExam(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         if (exam == null) {
@@ -34,14 +34,14 @@ privileged aspect ExamController_Roo_Controller_Json {
     public ResponseEntity<String> ExamController.listJson() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
-        List<Exam> result = Exam.findAllExams();
+        List<Exam> result = examService.findAllExams();
         return new ResponseEntity<String>(Exam.toJsonArray(result), headers, HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ExamController.createFromJson(@RequestBody String json) {
         Exam exam = Exam.fromJsonToExam(json);
-        exam.persist();
+        examService.saveExam(exam);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
@@ -50,7 +50,7 @@ privileged aspect ExamController_Roo_Controller_Json {
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ExamController.createFromJsonArray(@RequestBody String json) {
         for (Exam exam: Exam.fromJsonArrayToExams(json)) {
-            exam.persist();
+            examService.saveExam(exam);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -62,7 +62,7 @@ privileged aspect ExamController_Roo_Controller_Json {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         Exam exam = Exam.fromJsonToExam(json);
-        if (exam.merge() == null) {
+        if (examService.updateExam(exam) == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>(headers, HttpStatus.OK);
@@ -73,7 +73,7 @@ privileged aspect ExamController_Roo_Controller_Json {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         for (Exam exam: Exam.fromJsonArrayToExams(json)) {
-            if (exam.merge() == null) {
+            if (examService.updateExam(exam) == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
         }
@@ -82,13 +82,13 @@ privileged aspect ExamController_Roo_Controller_Json {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> ExamController.deleteFromJson(@PathVariable("id") Long id) {
-        Exam exam = Exam.findExam(id);
+        Exam exam = examService.findExam(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         if (exam == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        exam.remove();
+        examService.deleteExam(exam);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     

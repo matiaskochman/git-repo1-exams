@@ -3,9 +3,9 @@
 
 package com.exams.entity;
 
-import com.exams.entity.Exam;
 import com.exams.entity.ExamDataOnDemand;
 import com.exams.entity.ExamIntegrationTest;
+import com.exams.service.ExamService;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,10 +26,13 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
     @Autowired
     ExamDataOnDemand ExamIntegrationTest.dod;
     
+    @Autowired
+    ExamService ExamIntegrationTest.examService;
+    
     @Test
-    public void ExamIntegrationTest.testCountExams() {
+    public void ExamIntegrationTest.testCountAllExams() {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", dod.getRandomExam());
-        long count = Exam.countExams();
+        long count = examService.countAllExams();
         Assert.assertTrue("Counter for 'Exam' incorrectly reported there were no entries", count > 0);
     }
     
@@ -39,7 +42,7 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Exam' failed to provide an identifier", id);
-        obj = Exam.findExam(id);
+        obj = examService.findExam(id);
         Assert.assertNotNull("Find method for 'Exam' illegally returned null for id '" + id + "'", obj);
         Assert.assertEquals("Find method for 'Exam' returned the incorrect identifier", id, obj.getId());
     }
@@ -47,9 +50,9 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
     @Test
     public void ExamIntegrationTest.testFindAllExams() {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", dod.getRandomExam());
-        long count = Exam.countExams();
+        long count = examService.countAllExams();
         Assert.assertTrue("Too expensive to perform a find all test for 'Exam', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Exam> result = Exam.findAllExams();
+        List<Exam> result = examService.findAllExams();
         Assert.assertNotNull("Find all method for 'Exam' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Exam' failed to return any data", result.size() > 0);
     }
@@ -57,11 +60,11 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
     @Test
     public void ExamIntegrationTest.testFindExamEntries() {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", dod.getRandomExam());
-        long count = Exam.countExams();
+        long count = examService.countAllExams();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Exam> result = Exam.findExamEntries(firstResult, maxResults);
+        List<Exam> result = examService.findExamEntries(firstResult, maxResults);
         Assert.assertNotNull("Find entries method for 'Exam' illegally returned null", result);
         Assert.assertEquals("Find entries method for 'Exam' returned an incorrect number of entries", count, result.size());
     }
@@ -72,7 +75,7 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Exam' failed to provide an identifier", id);
-        obj = Exam.findExam(id);
+        obj = examService.findExam(id);
         Assert.assertNotNull("Find method for 'Exam' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyExam(obj);
         Integer currentVersion = obj.getVersion();
@@ -81,41 +84,41 @@ privileged aspect ExamIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void ExamIntegrationTest.testMergeUpdate() {
+    public void ExamIntegrationTest.testUpdateExamUpdate() {
         Exam obj = dod.getRandomExam();
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Exam' failed to provide an identifier", id);
-        obj = Exam.findExam(id);
+        obj = examService.findExam(id);
         boolean modified =  dod.modifyExam(obj);
         Integer currentVersion = obj.getVersion();
-        Exam merged = obj.merge();
+        Exam merged = examService.updateExam(obj);
         obj.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         Assert.assertTrue("Version for 'Exam' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
     @Test
-    public void ExamIntegrationTest.testPersist() {
+    public void ExamIntegrationTest.testSaveExam() {
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", dod.getRandomExam());
         Exam obj = dod.getNewTransientExam(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'Exam' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'Exam' identifier to be null", obj.getId());
-        obj.persist();
+        examService.saveExam(obj);
         obj.flush();
         Assert.assertNotNull("Expected 'Exam' identifier to no longer be null", obj.getId());
     }
     
     @Test
-    public void ExamIntegrationTest.testRemove() {
+    public void ExamIntegrationTest.testDeleteExam() {
         Exam obj = dod.getRandomExam();
         Assert.assertNotNull("Data on demand for 'Exam' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Exam' failed to provide an identifier", id);
-        obj = Exam.findExam(id);
-        obj.remove();
+        obj = examService.findExam(id);
+        examService.deleteExam(obj);
         obj.flush();
-        Assert.assertNull("Failed to remove 'Exam' with identifier '" + id + "'", Exam.findExam(id));
+        Assert.assertNull("Failed to remove 'Exam' with identifier '" + id + "'", examService.findExam(id));
     }
     
 }

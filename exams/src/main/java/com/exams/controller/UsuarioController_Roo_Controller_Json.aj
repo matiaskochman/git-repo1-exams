@@ -20,7 +20,7 @@ privileged aspect UsuarioController_Roo_Controller_Json {
     @RequestMapping(value = "/{id}", headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> UsuarioController.showJson(@PathVariable("id") Long id) {
-        Usuario usuario = Usuario.findUsuario(id);
+        Usuario usuario = usuarioService.findUsuario(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         if (usuario == null) {
@@ -34,14 +34,14 @@ privileged aspect UsuarioController_Roo_Controller_Json {
     public ResponseEntity<String> UsuarioController.listJson() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
-        List<Usuario> result = Usuario.findAllUsuarios();
+        List<Usuario> result = usuarioService.findAllUsuarios();
         return new ResponseEntity<String>(Usuario.toJsonArray(result), headers, HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UsuarioController.createFromJson(@RequestBody String json) {
         Usuario usuario = Usuario.fromJsonToUsuario(json);
-        usuario.persist();
+        usuarioService.saveUsuario(usuario);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
@@ -50,7 +50,7 @@ privileged aspect UsuarioController_Roo_Controller_Json {
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UsuarioController.createFromJsonArray(@RequestBody String json) {
         for (Usuario usuario: Usuario.fromJsonArrayToUsuarios(json)) {
-            usuario.persist();
+            usuarioService.saveUsuario(usuario);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -62,7 +62,7 @@ privileged aspect UsuarioController_Roo_Controller_Json {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         Usuario usuario = Usuario.fromJsonToUsuario(json);
-        if (usuario.merge() == null) {
+        if (usuarioService.updateUsuario(usuario) == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>(headers, HttpStatus.OK);
@@ -73,7 +73,7 @@ privileged aspect UsuarioController_Roo_Controller_Json {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         for (Usuario usuario: Usuario.fromJsonArrayToUsuarios(json)) {
-            if (usuario.merge() == null) {
+            if (usuarioService.updateUsuario(usuario) == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
         }
@@ -82,13 +82,13 @@ privileged aspect UsuarioController_Roo_Controller_Json {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> UsuarioController.deleteFromJson(@PathVariable("id") Long id) {
-        Usuario usuario = Usuario.findUsuario(id);
+        Usuario usuario = usuarioService.findUsuario(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         if (usuario == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        usuario.remove();
+        usuarioService.deleteUsuario(usuario);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     

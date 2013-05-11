@@ -6,9 +6,11 @@ package com.exams.controller;
 import com.exams.controller.ExamController;
 import com.exams.entity.Exam;
 import com.exams.entity.Question;
+import com.exams.service.ExamService;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ExamController_Roo_Controller {
     
+    @Autowired
+    ExamService ExamController.examService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ExamController.create(@Valid Exam exam, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -27,7 +32,7 @@ privileged aspect ExamController_Roo_Controller {
             return "exams/create";
         }
         uiModel.asMap().clear();
-        exam.persist();
+        examService.saveExam(exam);
         return "redirect:/exams/" + encodeUrlPathSegment(exam.getId().toString(), httpServletRequest);
     }
     
@@ -39,7 +44,7 @@ privileged aspect ExamController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ExamController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("exam", Exam.findExam(id));
+        uiModel.addAttribute("exam", examService.findExam(id));
         uiModel.addAttribute("itemId", id);
         return "exams/show";
     }
@@ -49,11 +54,11 @@ privileged aspect ExamController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("exams", Exam.findExamEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Exam.countExams() / sizeNo;
+            uiModel.addAttribute("exams", examService.findExamEntries(firstResult, sizeNo));
+            float nrOfPages = (float) examService.countAllExams() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("exams", Exam.findAllExams());
+            uiModel.addAttribute("exams", examService.findAllExams());
         }
         return "exams/list";
     }
@@ -65,20 +70,20 @@ privileged aspect ExamController_Roo_Controller {
             return "exams/update";
         }
         uiModel.asMap().clear();
-        exam.merge();
+        examService.updateExam(exam);
         return "redirect:/exams/" + encodeUrlPathSegment(exam.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ExamController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Exam.findExam(id));
+        populateEditForm(uiModel, examService.findExam(id));
         return "exams/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String ExamController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Exam exam = Exam.findExam(id);
-        exam.remove();
+        Exam exam = examService.findExam(id);
+        examService.deleteExam(exam);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

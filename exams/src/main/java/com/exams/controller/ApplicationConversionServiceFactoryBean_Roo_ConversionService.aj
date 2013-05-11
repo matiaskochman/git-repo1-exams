@@ -9,6 +9,9 @@ import com.exams.entity.HelloWorldEntity;
 import com.exams.entity.Question;
 import com.exams.entity.QuestionOption;
 import com.exams.entity.Usuario;
+import com.exams.service.ExamService;
+import com.exams.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -16,6 +19,12 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    @Autowired
+    ExamService ApplicationConversionServiceFactoryBean.examService;
+    
+    @Autowired
+    UsuarioService ApplicationConversionServiceFactoryBean.usuarioService;
     
     public Converter<Exam, String> ApplicationConversionServiceFactoryBean.getExamToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.exams.entity.Exam, java.lang.String>() {
@@ -28,7 +37,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Exam> ApplicationConversionServiceFactoryBean.getIdToExamConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.exams.entity.Exam>() {
             public com.exams.entity.Exam convert(java.lang.Long id) {
-                return Exam.findExam(id);
+                return examService.findExam(id);
             }
         };
     }
@@ -124,7 +133,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Usuario> ApplicationConversionServiceFactoryBean.getIdToUsuarioConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.exams.entity.Usuario>() {
             public com.exams.entity.Usuario convert(java.lang.Long id) {
-                return Usuario.findUsuario(id);
+                return usuarioService.findUsuario(id);
             }
         };
     }
