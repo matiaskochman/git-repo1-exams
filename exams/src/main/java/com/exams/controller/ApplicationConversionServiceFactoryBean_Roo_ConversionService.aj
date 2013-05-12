@@ -125,7 +125,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Usuario, String> ApplicationConversionServiceFactoryBean.getUsuarioToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.exams.entity.Usuario, java.lang.String>() {
             public String convert(Usuario usuario) {
-                return new StringBuilder().append(usuario.getUserName()).append(' ').append(usuario.getPassword()).append(' ').append(usuario.getEmail()).toString();
+                return new StringBuilder().append(usuario.getName()).append(' ').append(usuario.getPassword()).append(' ').append(usuario.getEmail()).toString();
             }
         };
     }

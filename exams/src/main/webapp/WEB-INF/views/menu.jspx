@@ -19,9 +19,6 @@
             <menu:item id="i_questionoption_new" messageCode="global_menu_new" url="/questionoptions?form" z="KDQQLUf+uPmr9YCbL80NdexAJc0="/>
             <menu:item id="i_questionoption_list" messageCode="global_menu_list" url="/questionoptions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="uvY3E1Y7WpjiRNJLJe765gekdFw="/>
         </menu:category>
-        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__usuarioindex_id" messageCode="global_generic" url="/usuario/index" z="qTBDBXqvaMJFTsk0NCQ2QWABrfw="/>
-        </menu:category>
         <menu:category id="c_usuario" z="g6oG0656PcsmmvUYeBtpgiQROck=">
             <menu:item id="i_usuario_new" messageCode="global_menu_new" url="/usuarios?form" z="RG1gCsiZQjg1HLDzXbHKht6yDkw="/>
             <menu:item id="i_usuario_list" messageCode="global_menu_list" url="/usuarios?page=1&amp;size=${empty param.size ? 10 : param.size}" z="P7ZIPrcTTBR41JYD0QldbYgsZrM="/>

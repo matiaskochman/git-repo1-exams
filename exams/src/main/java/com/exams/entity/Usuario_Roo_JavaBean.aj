@@ -7,12 +7,12 @@ import com.exams.entity.Usuario;
 
 privileged aspect Usuario_Roo_JavaBean {
     
-    public String Usuario.getUserName() {
-        return this.userName;
+    public String Usuario.getName() {
+        return this.name;
     }
     
-    public void Usuario.setUserName(String userName) {
-        this.userName = userName;
+    public void Usuario.setName(String name) {
+        this.name = name;
     }
     
     public String Usuario.getPassword() {

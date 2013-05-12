@@ -4,9 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_exams_entity_Usuario" items="${usuarios}" z="CVmsz0IfpZqii/ZQrQeZahWbHoA=">
         <table:table data="${usuarios}" id="l_com_exams_entity_Usuario" path="/usuarios" z="LemVLqN8xyRdSl/KuSOP4hSjYD4=">
-            <table:column id="c_com_exams_entity_Usuario_userName" property="userName" z="kt5M3iySwzRGl0K4PBzmGk5YI6c="/>
             <table:column id="c_com_exams_entity_Usuario_password" property="password" z="8iO5wC9UwMB27OpjhbQri4wR9qw="/>
             <table:column id="c_com_exams_entity_Usuario_email" property="email" z="HBftgxuJaL+FEPFWd0WatHUzerk="/>
+            <table:column id="c_com_exams_entity_Usuario_name" property="name" z="rCOuWlpevHo1Q8GN/0IKS8u4nsQ="/>
         </table:table>
     </page:list>
 </div>
