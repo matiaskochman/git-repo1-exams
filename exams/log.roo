@@ -55,3 +55,5 @@ focus --class ~.entity.Usuario
 service --interface ~.service.UsuarioService --class ~.service.UsuarioServiceImpl --entity ~.entity.Usuario
 focus --class ~.entity.Exam
 service --interface ~.service.ExamService --class ~.service.ExamServiceImpl --entity ~.entity.Exam
+focus --class ~.entity.Usuario
+field string --fieldName ff --sizeMax 50 --notNull true --unique true
