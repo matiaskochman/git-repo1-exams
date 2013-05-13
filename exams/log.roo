@@ -57,3 +57,5 @@ focus --class ~.entity.Exam
 service --interface ~.service.ExamService --class ~.service.ExamServiceImpl --entity ~.entity.Exam
 focus --class ~.entity.Usuario
 field string --fieldName ff --sizeMax 50 --notNull true --unique true
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-12 12:50:05
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-13 20:01:51
