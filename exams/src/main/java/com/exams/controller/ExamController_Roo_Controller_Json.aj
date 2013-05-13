@@ -38,15 +38,6 @@ privileged aspect ExamController_Roo_Controller_Json {
         return new ResponseEntity<String>(Exam.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
-    public ResponseEntity<String> ExamController.createFromJson(@RequestBody String json) {
-        Exam exam = Exam.fromJsonToExam(json);
-        examService.saveExam(exam);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }
-    
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ExamController.createFromJsonArray(@RequestBody String json) {
         for (Exam exam: Exam.fromJsonArrayToExams(json)) {

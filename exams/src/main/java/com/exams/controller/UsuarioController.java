@@ -26,7 +26,7 @@ public class UsuarioController {
 	
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json) {
-    	
+    	//{"name":"matias","password":"matias","email":"matias","id":null,"version":null}
     	
     	ObjectMapper mapper = new ObjectMapper();
     	ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -35,13 +35,10 @@ public class UsuarioController {
     	try {
 			usuario = mapper.readValue(json, Usuario.class);
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	/*
@@ -64,6 +61,8 @@ public class UsuarioController {
 		*/
     	
         //Usuario usuario = Usuario.fromJsonToUsuario(json);
+    	
+    	
         usuarioService.saveUsuario(usuario);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
