@@ -28,11 +28,34 @@ public class ExamController {
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json) {
     	
-    	//{"description":"examen1","questionsList":"matias","id":null,"version":null}
+    	
+    	//{"description": "William Shakespeare","questionsList": [{"description": "William Shakespeare","optionsList": [{"description": "William Shakespeare","optionNumber": "1"}],"correctOptionsList": [{"description": "William Shakespeare","optionNumber": "1"}]}]}
     	
     	
+    	/*
+    	 * {
+        "description": "William Shakespeare",
+        "questionsList": [
+            {
+	        "description": "William Shakespeare",
+        	"optionsList": [
+			{
+		        	"description": "William Shakespeare",
+		        	"optionNumber": "1"
+			}
+		]
+		"correctOptionsList": [
+			{
+		        	"description": "William Shakespeare",
+		        	"optionNumber": "1"
+			}
+		]
+            }
+       	]
+    }
+
+    	 */
     	
-        //Exam exam = Exam.fromJsonToExam(json);
     	ObjectMapper mapper = new ObjectMapper();
     	ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     	

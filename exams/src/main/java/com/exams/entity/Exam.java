@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Exam {
 
     @NotNull
+    @JsonProperty
     private String description;
 
     @ManyToMany(cascade = CascadeType.ALL)

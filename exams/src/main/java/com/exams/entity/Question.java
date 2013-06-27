@@ -10,6 +10,8 @@ import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
@@ -17,11 +19,14 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class Question {
 
     @NotNull
+    @JsonProperty
     private String description;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonProperty
     private Set<QuestionOption> optionsList = new HashSet<QuestionOption>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonProperty
     private Set<QuestionOption> correctOptionsList = new HashSet<QuestionOption>();
 }
