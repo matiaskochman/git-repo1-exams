@@ -15,22 +15,10 @@ privileged aspect QuestionOption_Roo_Jpa_Entity {
     
     declare @type: QuestionOption: @Entity;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long QuestionOption.id;
     
     @Version
     @Column(name = "version")
     private Integer QuestionOption.version;
-    
-    public Long QuestionOption.getId() {
-        return this.id;
-    }
-    
-    public void QuestionOption.setId(Long id) {
-        this.id = id;
-    }
     
     public Integer QuestionOption.getVersion() {
         return this.version;
